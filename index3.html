@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horváth-Varga Fanni | Pszichológus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS STÍLUSOK --- */
+        :root {
+            /* Cream.jpg ihlette színpaletta */
+            --bg-color: #F2E8DF;       /* Halvány krémszínű háttér */
+            --card-bg: #EADBC8;        /* Sötétebb krém a kártyákhoz */
+            --text-color: #2D2D2D;     /* Elegáns sötétszürke szöveg */
+            --accent-color: #A67B5B;   /* Földes barna a gombokhoz/kiemelésekhez */
+            --form-bg: #E6DCCD;        /* Űrlap háttér */
+            --red-color: #7F3A3F;
+            
+            --font-main: 'Inter', sans-serif;
+            --font-title: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Navigáció */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 10%;
+            align-items: center;
+            background-color: transparent;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+        }
+
+        nav.scrolled {
+            /*
+            background-color: var(--bg-color);*/
+            background-color: #f5eee7;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+             /*mod
+            color: var(--text-color);*/
+            color: black;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: black;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-btn {
+            border-bottom: 1px solid var(--text-color);
+            padding-bottom: 2px;
+        }
+
+        /* Hero Szekció */
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 120px 10% 100px 10%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/hero.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 45%;
+            position: relative;
+            z-index: 1;
+            /*margin-left: 5%;*/
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 3.8rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            /*mod
+            color: var(--text-color);*/
+            color: black;
+        }
+
+        h1 span {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .description {
+            margin-bottom: 40px;
+            max-width: 90%;
+            font-size: 1.05rem;
+            /*mod
+            color: #555;*/
+            color: rgb(0, 0, 0);
+        }
+
+        .cta-button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #8b654b;
+            transform: translateY(-2px);
+        }
+
+        /* Kép stílus (Boltív forma a cream.jpg alapján) - most a rólam szekcióban */
+        .about-image {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            max-width: 400px;
+            height: 550px;
+            background-color: #ddd;
+            /* Ez hozza létre a jellegzetes íves formát */
+            border-radius: 200px 200px 0 0; 
+            overflow: hidden;
+            /* mod
+            box-shadow: 20px 20px 0px rgba(166, 123, 91, 0.1);*/
+            
+            box-shadow: 20px 20px 0px var(--red-color)
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Szolgáltatások */
+        .services {
+            padding: 100px 10%;
+            background-color: rgba(255,255,255,0.25); /* Nagyon enyhe világosítás */
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            color: var(--text-color);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            padding: 50px 30px;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: #4a4a4a;
+            line-height: 1.7;
+        }
+        /* Milyen esetekben - lista stílus */
+        .cases-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .case-item {
+            background-color: var(--card-bg);
+            padding: 25px 35px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .case-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .case-item p {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Rólam / Bemutatkozás */
+        .about {
+            padding: 100px 10%;
+            /*background-color: var(--bg-color);*/
+            background-color: rgba(255,255,255,0.35);
+
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            flex: 0 0 45%;
+        }
+
+        .about-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .about h2 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .about h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        .about p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .consultation {
+            padding: 100px 10%;
+            background-color: white; /* Nagyon enyhe világosítás */
+        }
+
+        /* Konzultáció - Carousel stílus */
+        .consultation-carousel {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .consultation-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .consultation-step {
+            min-width: 100%;
+            background-color: var(--card-bg);
+            padding: 0px 40px 40px 40px; /* Felül 15px, jobbra-balra 40px, alul 40px */
+            border-radius: 8px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .consultation-step::before {
+            content: attr(data-step);
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            opacity: 0.3;
+            margin-right: 15px;
+        }
+
+        .consultation-step h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            margin-top: 0px; /* Csökkentsd vagy állítsd 0-ra */
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .consultation-step h3::before {
+            content: attr(data-number);
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            opacity: 0.3;
+            margin-right: 15px;
+            padding-bottom: 5px;
+            flex-shrink: 0;
+            line-height: 1; /* Hozzáadva */
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--accent-color);
+        }
+
+        .education {
+            padding: 100px 10%;
+            padding-top: 20px;
+            background-color: white; /* Nagyon enyhe világosítás */
+        }
+
+        /* Képzések - lista stílus */
+        .education-list {
+            max-width: 800px;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        .education-item {
+            background-color: var(--card-bg);
+            padding: 30px 40px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 80px;
+            transition: transform 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .education-item::before {
+            content: '✓';
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .education-item h3 {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        /* Képzések - Timeline stílus */
+.education-timeline {
+    max-width: 700px;
+    margin: 0;
+    position: relative;
+    padding: 20px 0;
+}
+
+.education-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent-color), var(--card-bg));
+    top: 0;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.timeline-year {
+    flex: 0 0 48%;
+    text-align: right;
+    padding-right: 15px;
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    font-weight: 700;
+    opacity: 0.7;
+}
+
+.timeline-item:nth-child(odd) .timeline-year {
+    text-align: left;
+    padding-right: 0;
+    padding-left: 15px;
+}
+
+.timeline-content {
+    flex: 0 0 48%;
+    background-color: var(--card-bg);
+    padding: 15px 15px 15px 15px; /* Jobb oldali padding csökkentve */
+    margin-left:30px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right:30px;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.timeline-content h3 {
+    font-family: var(--font-title);
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: var(--text-color);
+    line-height: 1.3;
+    text-align: center;
+}
+
+.timeline-content .status {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
+}
+
+.timeline-content .status.ongoing {
+    background-color: #6ba368;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background-color: var(--accent-color);
+    border: 3px solid var(--bg-color);
+    border-radius: 50%;
+    z-index: 1;
+    top: 20px;
+    box-shadow: 0 0 0 2px var(--card-bg);
+}
+        
+
+        /* Kompetenciahatárok */
+        .competence {
+            padding: 100px 10%;
+            /* mod
+            background-color: var(--form-bg);*/
+            background-color: rgba(255,255,255,0.35);
+        }
+
+        .competence-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .competence-content h2 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        .competence-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #4a4a4a;
+        }
+        /**/
+
+        .competence2 {
+            padding: 100px 10%;
+            padding-bottom: 20px;
+            background-color: rgba(255,255,255,0.35);
+        }
+
+        .competence2-box {
+            max-width: 1200px;
+            margin: 0 auto;
+            /*: linear-gradient(135deg, #1a3a3a 0%, #2d5555 100%);*/
+            background-color: var(--accent-color);
+            border-radius: 30px;
+            padding: 60px;
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .competence2-main {
+            flex: 1;
+        }
+
+        .competence2-main h2 {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .competence2-subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--card-bg);
+            font-weight: 400;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .competence2-detail {
+            flex: 1;
+        }
+
+        .competence2-detail p {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .competence2-highlight {
+            font-weight: 600;
+            font-size: 1.05rem !important;
+            color: white !important;
+        }
+
+        /* Vélemények */
+        .testimonials {
+            padding: 100px 10%;
+            background-color: rgba(255,255,255,0.35);
+            background-color: var(--bg-color);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: var(--card-bg);
+            padding: 40px 35px;
+            border-radius: 8px;
+            position: relative;
+            padding-top: 60px;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+            font-family: var(--font-title);
+            line-height: 1;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #4a4a4a;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-align: right;
+        }
+        
+        /* Kapcsolat Űrlap */
+        .contact {
+            padding: 100px 10%;
+            background-color: var(--form-bg);
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 600px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-container h2 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-container > p {
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #999;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            outline: none;
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-bottom-color: var(--accent-color);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 1px solid var(--text-color);
+            padding: 15px 40px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            align-self: flex-start;
+            margin-top: 20px;
+            color: var(--text-color);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* Szekció képek elrendezése */
+        .section-with-image {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-image {
+            flex: 0 0 40%;
+            position: relative;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-content {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .section-image.left {
+            order: -1;
+        }
+
+        .section-image.right {
+            order: 1;
+        }
+
+        /* Lábléc */
+        footer {
+            background-color: var(--bg-color);
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: #666;
+        }
+
+        
+
+        /* Reszponzivitás */
+        @media (max-width: 900px) {
+            .hero {
+                text-align: center;
+                padding-top: 20px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                margin-top: 50px;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+
+            .about-image {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+
+            .about-content {
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section-with-image {
+                flex-direction: column;
+            }
+
+            .section-image {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+
+            .section-image.left,
+            .section-image.right {
+                order: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">HORVÁTH-VARGA FANNI</div>
+        <ul>
+            <li><a href="#rolam">Rólam</a></li>
+            <li><a href="#szolgaltatasok">Szolgáltatások</a></li>
+            <li><a href="#kapcsolat" class="nav-btn">Időpontfoglalás</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <p class="subtitle">Okleveles pszichológus</p>
+            <h1>Támogatás <br><span> az önismeret és <br>a változás útján</span></h1>
+            <p class="description">Gyerekek, fiatalok és felnőttek kísérése a mindennapi nehézségek, kapcsolati kihívások és lelki terhek feldolgozásában - elfogadható, biztonságos légkörben.</p>
+            <a href="#kapcsolat" class="cta-button">Időpontot foglalok</a>
+        </div>
+    </header>
+
+
+    <section id="esetek" class="services">
+        <div class="section-with-image">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Milyen esetekben fordulhat hozzám?</h2>
+                </div>
+                <div class="cases-list">
+            <div class="case-item">
+                <p>Ha életvezetési elakadást él meg, vagy változtatni szeretne</p>
+            </div>
+            <div class="case-item">
+                <p>Ha szeretné tisztábban látni céljait és irányait</p>
+            </div>
+            <div class="case-item">
+                <p>Ha fontos döntések előtt áll, és bizonytalan az irányválasztásban</p>
+            </div>
+            <div class="case-item">
+                <p>Ha önismereti kérdések foglalkoztatják</p>
+            </div>
+            <div class="case-item">
+                <p>Ha önbizalomhiánnyal, önértékelési nehézségekkel küzd</p>
+            </div>
+            <div class="case-item">
+                <p>Ha tartós stresszt, belső feszültséget vagy túlterheltséget tapasztal</p>
+            </div>
+            <div class="case-item">
+                <p>Ha érzelmi nehézségekkel, hangulati ingadozásokkal szembesül</p>
+            </div>
+            <div class="case-item">
+                <p>Ha kapcsolataiban visszatérő konfliktusokat él meg, vagy szeretné jobban megérteni saját és mások működését</p>
+            </div>
+            <div class="case-item">
+                <p>Ha motivációvesztést, kiüresedést vagy céltalanság érzését tapasztalja</p>
+            </div>
+            <div class="case-item">
+                <p>Ha veszteséget, gyászt él át, és támogatásra van szüksége a feldolgozásban</p>
+            </div>
+            <div class="case-item">
+                <p>Ha párkapcsolati nehézségekkel küzd, vagy szeretné javítani kapcsolata minőségét</p>
+            </div>
+            <div class="case-item">
+                <p>Ha pályaválasztási vagy karrierdöntési kérdések foglalkoztatják</p>
+                </div>
+            </div>
+            </div>
+            <div class="section-image right">
+                <img src="cases.jpg" alt="Esetek">
+            </div>
+        </div>
+    </section>
+
+
+    
+    <section id="konzultacio" class="consultation">
+        <div class="section-with-image">
+            <div class="section-image left">
+                <img src="images/konzultacio.jpg" alt="Konzultáció">
+            </div>
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Hogyan zajlik egy pszichológiai konzultáció?</h2>
+                    <p style="margin-top: 20px; font-size: 1.05rem; line-height: 1.8;">A pszichológiai konzultáció egy biztonságos, elfogadó és bizalmas tér, ahol lehetőség nyílik a nehézségek, kérdések és élethelyzetek közös megértésére és feldolgozására.</p>
+                </div>
+                <div class="consultation-carousel">
+                <div class="consultation-track">
+                    <div class="consultation-step">
+                        <h3 data-number="01">Első alkalom – ismerkedés és célok tisztázása</h3>
+                        <p>Az első találkozó során átbeszéljük, milyen problémával érkezik, milyen élethelyzetben van, és milyen változást szeretne elérni. Közösen megfogalmazzuk a konzultáció céljait, és áttekintjük a lehetséges együttműködés kereteit.</p>
+                    </div>
+                    <div class="consultation-step">
+                        <h3 data-number="02">Közös munka – megértés és változás</h3>
+                        <p>A további alkalmak során a beszélgetés mellett különböző pszichológiai megközelítéseket és módszereket alkalmazunk, amelyek segítenek jobban megérteni az érzelmeket, gondolatokat és viselkedési mintákat, feltárni a nehézségek mögötti összefüggéseket, új megküzdési módokat és megoldásokat találni, erősíteni az önismeretet és az önbizalmat.</p>
+                    </div>
+                    <div class="consultation-step">
+                        <h3 data-number="03">Kapcsolat és biztonság</h3>
+                        <p>A konzultáció során fontos szerepet kap a bizalom és az elfogadó légkör. A beszélgetések bizalmasak, és a kliens tempójához igazodva haladunk.</p>
+                    </div>
+                    <div class="consultation-step">
+                        <h3 data-number="04">Időtartam és gyakoriság</h3>
+                        <p>Egy konzultáció általában 50 percig tart. A találkozások gyakoriságát közösen alakítjuk ki (általában heti vagy kétheti rendszerességgel).</p>
+                    </div>
+                    <div class="consultation-step">
+                        <h3 data-number="05">Kompetenciahatárok és továbbirányítás</h3>
+                        <p>Fontosnak tartom a szakmai kompetenciahatárok tiszteletben tartását. Amennyiben egy probléma meghaladja az én kompetenciámat, segítek a megfelelő szakemberhez való továbbirányításban.</p>
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kepzesek" class="education">
+        <div class="section-with-image">
+            <div class="section-image right">
+                <img src="images/kepzesek.jpg" alt="Képzések">
+            </div>
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Képzések és Szakmai Háttér</h2>
+                </div>
+                <ul class="education-list">
+            <li class="education-item">
+                <h3>2020-2023 — Viselkedéselemző (ELTE-PPK)</h3>
+            </li>
+            <li class="education-item">
+                <h3>2023 — OH kártya instruktor</h3>
+            </li>
+            <li class="education-item">
+                <h3>2023-2025 — Okleveles pszichológus (Klinikai- és egészségpszichológia specializáció)</h3>
+            </li>
+            <li class="education-item">
+                <h3>2024-Jelenleg — Képzésben lévő pár- és családterapeuta</h3>
+            </li>
+            <li class="education-item">
+                <h3>2025-Jelenleg — Képzésben lévő mindfulness vezető</h3>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </section>
+
+<section id="kepzesek" class="education">
+    <div class="section-with-image">
+        <div class="section-content">
+            <div class="section-header">
+                <h2>Képzések és Szakmai Háttér</h2>
+            </div>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3>Viselkedéselemző szak megkezdése</h3>
+                        <!--<span class="status">Befejezett</span>-->
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-content">
+                        <h3>Viselkedéselemző (ELTE-PPK)</h3>
+                        <h3>OH kártya instruktor</h3>
+                        <h3>Okleveles pszichológus szak megkezdése</h3>
+                        <!--<span class="status">Befejezett</span>-->
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-content">
+                        <h3>Pár- és családterapeuta képzés megkezdése</h3>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h3>Okleveles pszichológus (Klinikai- és egészségpszichológia specializáció)</h3>
+                        <h3>Mindfulness vezető képzés megkezdése</h3>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section-image right">
+            <img src="images/kepzesek.jpg" alt="Képzések">
+        </div>
+    </div>
+</section>
+    <!--
+    <section class="competence2">
+        <div class="competence2-box">
+            <div class="competence2-main">
+                <h2>Kompetenciahatárok</h2>
+                <p class="competence2-subtitle">Fontosnak tartom a szakmai kompetenciahatárok tiszteletben tartását.</p>
+            </div>
+            <div class="competence2-detail">
+                <p>Munkám során kiemelt figyelmet fordítok a kompetenciahatárok betartására. Ha egy adott nehézség nem tartozik a szakmai kompetenciám körébe, felelősséggel és együttműködően támogatom a kliens megfelelő szakemberhez történő irányítását.</p>
+            </div>
+        </div>
+    </section>-->
+
+    <section class="competence2">
+        <div class="competence2-box">
+            <div class="competence2-main" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h2>Kompetenciahatárok</h2>
+                <p class="competence2-subtitle" style="font-size: 1.3rem";>Munkám során kiemelt figyelmet fordítok a kompetenciahatárok betartására. Ha egy adott nehézség nem tartozik a szakmai kompetenciám körébe, felelősséggel és együttműködően támogatom a kliens megfelelő szakemberhez történő irányítását.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="rolam" class="about">
+        <div class="about-container">
+            <div class="about-image">
+                <div class="image-placeholder">
+                    <img src="fanni_about.png" alt="Horváth-Varga Fanni">
+                </div>
+            </div>
+            <div class="about-content">
+                <h2>Horváth-Varga Fanni</h2>
+                <h3>Okleveles pszichológus</h3>
+                <p>Pszichológusként elhivatottan támogatom a hozzám fordulókat önismereti útjukon és a mindennapi kihívások megoldásában. Egyetemi tanulmányaim mellett iskolapszichológiai tapasztalatot szereztem, ahol diákokkal és szülőkkel dolgoztam együtt prevenciós és tanácsadási keretekben. Jelenleg pszichiátriai osztályon dolgozom, ahol különböző klinikai kórképekkel, valamint számos élethelyzeti nehézséggel, betegséggel és lelki megterheléssel találkozom.
+                <p>Munkám során fontosnak tartom a biztonságos, elfogadó légkör megteremtését, ahol gyerekek, fiatalok és felnőttek egyaránt megoszthatják nehézségeiket, és közösen kereshetjük a megoldásokat. Szívesen foglalkozom iskolai problémákkal, pályaválasztási kérdésekkel, családi konfliktusokkal, stresszkezeléssel, életvezetési dilemmákkal, szorongással, gyásszal a családban és krízishelyzetekkel.</p>
+                <p>Pár- és családterápiás képzésben veszek részt, munkámat pedig meghatározza a rendszerszemlélet, amelyben a problémákat a kapcsolatok és a tágabb környezet összefüggéseiben vizsgálom. Célom, hogy támogatást és gyakorlati eszközöket nyújtsak a változáshoz, a lelki egészség megőrzéséhez és a személyes fejlődéshez. Fontos számomra a folyamatos szakmai fejlődés, jelenleg mindulness tanárképzésben képződöm.</p>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="velemények" class="testimonials">
+        <div class="section-with-image">
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Rólam írták</h2>
+                </div>
+                <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fanni segítségével új perspektívát nyertem és biztonságban éreztem magam.</p>
+                <div class="testimonial-author">— Kliens 1</div>
+            </div>
+            <div class="testimonial-card">
+                <p>Professzionális, empatikus hozzáállás. Sokat segített a párkapcsolati nehézségeink megoldásában.</p>
+                <div class="testimonial-author">— Kliens 2</div>
+            </div>
+            <div class="testimonial-card">
+                <p>Hálás vagyok a támogatásért és a gyakorlati eszközökért, amiket kaptam. Ajánlom mindenkinek!</p>
+                <div class="testimonial-author">— Kliens 3</div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kapcsolat" class="contact">
+        <div class="section-with-image">
+            <div class="section-image left">
+                <img src="images/contact.jpg" alt="Kapcsolat">
+            </div>
+            <div class="contact-container">
+            <h2>Kérjen időpontot</h2>
+            <p>Töltse ki az űrlapot, és pár napon belül jelentkezem időpont egyeztetés céljából.</p>
+            
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Teljes név" required>
+                <input type="tel" id="phone" placeholder="Telefonszám" required>
+                <input type="email" id="email" placeholder="E-mail cím" required>
+                <textarea id="message" placeholder="Miben segíthetek? (Rövid leírás)"></textarea>
+                <button type="submit" class="submit-btn">Küldés ↗</button>
+            </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Horváth-Varga Fanni - Pszichológiai magánrendelés. Minden jog fenntartva.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navigáció megjelenése/eltűnése scroll alapján
+            const nav = document.querySelector('nav');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+            
+            // 2. Sima görgetés (Smooth Scroll) a menüpontokra kattintva
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 3. Űrlap beküldés szimuláció
+            const form = document.getElementById('contactForm');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Megakadályozza az oldal újratöltését
+                
+                const btn = form.querySelector('.submit-btn');
+                const originalText = btn.innerText;
+                
+                // Vizuális visszajelzés
+                btn.innerText = 'Küldés...';
+                btn.style.opacity = '0.7';
+                
+                // Szimulált szerver válaszidő
+                setTimeout(() => {
+                    alert('Köszönöm a megkeresést! Hamarosan felveszem Önnel a kapcsolatot a megadott elérhetőségeken.');
+                    form.reset(); // Mezők törlése
+                    btn.innerText = originalText;
+                    btn.style.opacity = '1';
+                }, 1500);
+            });
+
+            // A script tag-en belül, a DOMContentLoaded esemény végéhez add hozzá:
+
+            // 4. Konzultáció carousel
+            const consultationTrack = document.querySelector('.consultation-track');
+            const consultationDots = document.querySelectorAll('#konzultacio .dot');
+            const consultationSteps = document.querySelectorAll('.consultation-step');
+            let currentConsultationIndex = 0;
+            let consultationAutoplay;
+
+            function updateConsultationCarousel(index) {
+                consultationTrack.style.transform = `translateX(-${index * 100}%)`;
+                consultationDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            function nextConsultationSlide() {
+                currentConsultationIndex = (currentConsultationIndex + 1) % consultationSteps.length;
+                updateConsultationCarousel(currentConsultationIndex);
+            }
+
+            // Automatikus forgatás 5mp-enként
+            consultationAutoplay = setInterval(nextConsultationSlide, 5000);
+
+            // Pontokra kattintás
+            consultationDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentConsultationIndex = index;
+                    updateConsultationCarousel(currentConsultationIndex);
+                    
+                    // Újraindítjuk az automatikus forgatást
+                    clearInterval(consultationAutoplay);
+                    consultationAutoplay = setInterval(nextConsultationSlide, 5000);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
