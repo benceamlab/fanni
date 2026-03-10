@@ -26,6 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('nav ul');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('active') ? 'true' : 'false');
+        });
+
+        navMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
+
     // 3. Űrlap beküldés szimuláció
     const form = document.getElementById('contactForm');
     

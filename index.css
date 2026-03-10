@@ -7,6 +7,7 @@
     --accent-color: #A67B5B;   /* Földes barna a gombokhoz/kiemelésekhez */
     --form-bg: #E6DCCD;        /* Űrlap háttér */
     --red-color: #7F3A3F;
+
     
     --font-main: 'Inter', sans-serif;
     --font-title: 'Playfair Display', serif;
@@ -40,7 +41,7 @@ nav {
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 30px 10%;
     align-items: center;
     background-color: transparent;
@@ -48,9 +49,13 @@ nav {
     z-index: 1000;
 }
 
+.nav-brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
 nav.scrolled {
-    /*
-    background-color: var(--bg-color);*/
     background-color: #f5eee7;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
@@ -60,17 +65,17 @@ nav.scrolled {
     font-weight: 700;
     font-size: 1.4rem;
     letter-spacing: 2px;
-     /*mod
-    color: var(--text-color);*/
     color: black;
     border-right: 2px solid black;
     padding-right: 10px; 
+    white-space: nowrap;
 }
 
 nav ul {
     display: flex;
     list-style: none;
     gap: 30px;
+    margin-left: auto;
 }
 
 nav a {
@@ -88,8 +93,43 @@ nav a:hover {
 }
 
 .nav-btn {
-    border-bottom: 1px solid var(--text-color);
+    border-bottom: 2px solid black;
     padding-bottom: 2px;
+}
+
+nav .logo + .subtitle {
+    margin-left: 10px;   /* pontosan 10px a border-right után */
+    margin-right:10px; 
+    margin-top: 0;
+    white-space: nowrap;
+}
+
+nav .subtitle {
+    margin-right: 0;
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    width: 28px;
+    height: 22px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.menu-toggle:focus-visible {
+    outline: 2px solid black;
+    outline-offset: 2px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    margin: 3px auto;
+    background-color: black;
+    border-radius: 1px;
 }
 
 /* Hero Szekció */
@@ -125,10 +165,10 @@ nav a:hover {
 
 .subtitle {
     text-transform: uppercase;
+    margin-top: 2px;
     font-size: 0.85rem;
     letter-spacing: 3px;
-    /*margin-bottom: 15px;*/
-    margin-left:-200px;
+    margin-left: 10px;
     color: var(--accent-color);
     font-weight: 600;
 }
@@ -185,7 +225,7 @@ h1 span {
 }
 
 .image-placeholder {
-    width: 100%;
+    /*width: 100%;*/
     max-width: 400px;
     height: 550px;
     background-color: #ddd;
@@ -991,8 +1031,7 @@ transform: scale(1.1);
 /* Vélemények */
 .testimonials {
     padding: 100px 10%;
-    background-color: rgba(255,255,255,0.35);
-    background-color: var(--bg-color);
+    background-color: white;
 }
 
 .testimonial-grid {
@@ -1130,10 +1169,11 @@ textarea {
 
 .section-image img {
     width: 100%;
-    height: 600px;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-left: 10%;
 }
 
 .section-content {
@@ -1173,10 +1213,30 @@ footer {
         text-align: center;
         padding-top: 20px;
     }
+        .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height:100%;
+        background-image: url('images/hero_phone_ext2.jpeg');
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+    }
     
     .hero-content {
         max-width: 100%;
         margin-top: 50px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        margin-left: 0;
     }
 
     .about-container {
@@ -1192,26 +1252,132 @@ footer {
         text-align: center;
     }
 
-    h1 {
-        font-size: 2.5rem;
-    }
-    
     nav {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 8px 12px;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+
+    .nav-brand {
+        grid-column: 1;
+        display: flex;
         flex-direction: column;
-        gap: 20px;
+        align-items: flex-start;
+        min-width: 0;
+        max-width: calc(100% - 12px);
+        overflow: hidden;
+    }
+
+    .menu-toggle {
+        display: block;
+        grid-column: 2;
+        justify-self: end;
+        line-height: 0;
+    }
+
+    nav ul {
+        grid-column: 2;
+        justify-self: end;
+        margin-left: 0;
+        display: none;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+        padding-top: 8px;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    .logo {
+        border-bottom: 2px solid black;
+        padding-bottom: 5px;
+        border-right: 0;
+        font-size: 1.1rem;
+        letter-spacing: 1.4px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    nav .logo + .subtitle {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 6px;
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .section-with-image {
         flex-direction: column;
     }
 
+    .section-image img {
+        margin-left: 0%;
+    }
+
     .section-image {
         flex: 0 0 auto;
+        width: 100%;
+        order: 0;
+    }
+
+    .section-content {
+        order: 1;
         width: 100%;
     }
 
     .section-image.left,
     .section-image.right {
         order: 0;
+    }
+
+    .timeline-item {
+        align-items: flex-start;
+    }
+
+    .timeline-year {
+        flex: 0 0 72px;
+        background-color: #f9f9f9;
+        padding-right: 10px;
+        font-size: 1.2rem;
+    }
+
+    .timeline-content {
+        margin-left: 0;
+    }
+
+    .education2 .education-timeline {
+        padding-left: 0;
+    }
+
+    .education2 .education-timeline::before {
+        left: 16px;
+    }
+
+    .education2 .timeline-item {
+        padding-left: 0;
+        gap: 10px;
+    }
+
+    .education2 .timeline-year {
+        flex: 0 0 64px;
+        padding-left: 0;
+        padding-right: 10px;
+        font-size: 1.2rem;
+        opacity: 1.0;
+    }
+
+    .education2 .timeline-content {
+        margin-left: 0;
+        flex: 1;
     }
 }
