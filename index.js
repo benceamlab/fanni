@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
             navMenu.classList.toggle('open');
+            nav.classList.toggle('menu-open', navMenu.classList.contains('open'));
             menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('active') ? 'true' : 'false');
         });
 
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.innerWidth <= 900) {
                     menuToggle.classList.remove('active');
                     navMenu.classList.remove('open');
+                    nav.classList.remove('menu-open');
                     menuToggle.setAttribute('aria-expanded', 'false');
                 }
             });
@@ -196,7 +198,7 @@ const caseIcons = [
 ];
 
 // Icon pontok létrehozása
-const radius3 = 300;
+const radius3 = casesWrapper.offsetWidth / 2;
 for (let i = 0; i < numberOfCases3; i++) {
     const iconDot = document.createElement('div');
     iconDot.classList.add('case-icon-dot');
