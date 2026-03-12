@@ -49,27 +49,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Űrlap beküldés szimuláció
+    // 3. Űrlap beküldés
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        clearTimeout(toast.hideTimeout);
+        toast.hideTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 5000);
+    }
+
     const form = document.getElementById('contactForm');
-    
-    form.addEventListener('submit', (e) => {
-        e.preventDefault(); // Megakadályozza az oldal újratöltését
-        
-        const btn = form.querySelector('.submit-btn');
-        const originalText = btn.innerText;
-        
-        // Vizuális visszajelzés
-        btn.innerText = 'Küldés...';
-        btn.style.opacity = '0.7';
-        
-        // Szimulált szerver válaszidő
-        setTimeout(() => {
-            alert('Köszönöm a megkeresést! Hamarosan felveszem Önnel a kapcsolatot a megadott elérhetőségeken.');
-            form.reset(); // Mezők törlése
-            btn.innerText = originalText;
-            btn.style.opacity = '1';
-        }, 1500);
-    });
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const btn = form.querySelector('.submit-btn');
+            const originalText = btn ? btn.innerText : 'Küldés ↗';
+
+            if (btn) {
+                btn.innerText = 'Küldés...';
+                btn.style.opacity = '0.7';
+                btn.disabled = true;
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method || 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    showToast('Köszönöm a megkeresést! Hamarosan felveszem Önnel a kapcsolatot.');
+                    form.reset();
+                } else {
+                    const data = await response.json().catch(() => ({}));
+                    const message = data?.errors?.[0]?.message || 'Hiba történt a küldés során. Próbálja újra.';
+                    showToast(message);
+                }
+            } catch (err) {
+                showToast('Nem sikerült elküldeni az üzenetet. Ellenőrizze az internetkapcsolatot.');
+                } finally {
+                if (btn) {
+                btn.innerText = originalText;
+                btn.style.opacity = '1';
+                btn.disabled = false;
+                }
+            }
+        });
+    }
 
     // A script tag-en belül, a DOMContentLoaded esemény végéhez add hozzá:
 
@@ -232,9 +268,10 @@ function updateCases3Display(index) {
     caseIconDots.forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
     });
-    
-    casesLearnMore.classList.remove('active');
-    setTimeout(() => casesLearnMore.classList.add('active'), 100);
+    if(casesLearnMore) {
+        casesLearnMore.classList.remove('active');
+        setTimeout(() => casesLearnMore.classList.add('active'), 100);
+    }
 }
 
 function nextCase3() {

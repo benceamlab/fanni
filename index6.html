@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horváth-Varga Fanni | Pszichológus</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link href="index.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
     
     <nav>
@@ -224,11 +226,11 @@
             <h2>Kérjen időpontot</h2>
             <p>Töltse ki az űrlapot, és pár napon belül jelentkezem időpont egyeztetés céljából.</p>
             
-            <form id="contactForm">
-                <input type="text" id="name" placeholder="Teljes név" required>
-                <input type="tel" id="phone" placeholder="Telefonszám" required>
-                <input type="email" id="email" placeholder="E-mail cím" required>
-                <textarea id="message" placeholder="Miben segíthetek? (Rövid leírás)"></textarea>
+            <form id="contactForm" action="https://formspree.io/f/maqpjoqb" method="POST">
+                <input type="text" id="name" placeholder="Teljes név" name="Név" required>
+                <input type="tel" id="phone" placeholder="Telefonszám" name="Telefonszám" required>
+                <input type="email" id="email" placeholder="E-mail cím" name="Email" required>
+                <textarea id="message" placeholder="Miben segíthetek? (Rövid leírás)" name="Üzenet"></textarea>
                 <button type="submit" class="submit-btn">Küldés ↗</button>
             </form>
             </div>
@@ -236,8 +238,10 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Horváth-Varga Fanni - Pszichológiai magánrendelés. <br>Minden jog fenntartva.</p>
+        <p>&copy; 2026 Horváth-Varga Fanni - Pszichológiai konzultáció. <br>Minden jog fenntartva.</p>
     </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script src="index.js" ></script>
 </body>
